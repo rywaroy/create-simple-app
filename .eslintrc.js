@@ -19,5 +19,18 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-    }
+        'no-console': 0,
+        "import/extensions": [2, "never", { "ts": "never" }],
+    },
+    settings: {
+        'import/resolver': {
+            webpack: {
+                config: {
+                    resolve: {
+                        extensions: ['.js', '.ts']
+                    }
+                }
+            }
+        },
+    },
 };
