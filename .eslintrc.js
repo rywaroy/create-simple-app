@@ -23,6 +23,8 @@ module.exports = {
     "rules": {
         'no-console': 0,
         "import/extensions": [2, "never", { "ts": "never" }],
+        'global-require': 0,
+        'import/no-dynamic-require': 0,
     },
     settings: {
         'import/resolver': {

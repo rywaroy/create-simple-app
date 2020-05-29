@@ -20,6 +20,7 @@
   "homepage": "https://github.com/rywaroy/create-simple-app#readme",
   "devDependencies": {
     "@types/fs-extra": "^9.0.1",
+    "@types/glob": "^7.1.1",
     "@types/inquirer": "^6.5.0",
     "@types/node": "^14.0.5",
     "@types/validate-npm-package-name": "^3.0.0",
@@ -36,6 +37,7 @@
     "chalk": "^4.0.0",
     "commander": "^5.1.0",
     "fs-extra": "^9.0.0",
+    "glob": "^7.1.6",
     "inquirer": "^7.1.0",
     "validate-npm-package-name": "^3.0.0"
   }
