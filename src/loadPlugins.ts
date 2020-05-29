@@ -1,6 +1,6 @@
 import glob from 'glob';
 
-const path = require('path');
+import path = require('path');
 
 type PluginFunction = () => void;
 
