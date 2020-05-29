@@ -2,7 +2,15 @@ import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 
-export default async function checkTargetDir(targetDir: string) {
+const path = require('path');
+
+export default async function createTargetDir(projectName: string) {
+  if (projectName === '.') { // 如果在当前目录下创建则不创建额外文件夹
+    return;
+  }
+
+  const targetDir = path.resolve(process.cwd(), projectName); // 生成项目的目录
+
   if (fs.existsSync(targetDir)) {
     const { action } = await inquirer.prompt([
       {
@@ -16,8 +24,11 @@ export default async function checkTargetDir(targetDir: string) {
       },
     ]);
     if (action === 'overwrite') {
-      console.log(`\正在删除 ${chalk.cyan(targetDir)}...`);
-      await fs.remove(targetDir);
+      console.log(`正在删除 ${chalk.cyan(targetDir)}...`);
+      fs.removeSync(targetDir);
+      fs.ensureDirSync(targetDir);
     }
+  } else {
+    fs.ensureDirSync(targetDir);
   }
 }
