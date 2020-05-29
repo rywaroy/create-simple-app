@@ -1,6 +1,7 @@
 import commander from 'commander';
 import checkAppName from './checkAppName';
 import createTargetDir from './createTargetDir';
+import loadPlugins from './loadPlugins';
 
 const packageJson = require('../package.json');
 
@@ -23,3 +24,7 @@ if (program.args.length > 0) { // 创建新文件夹
 
 // 创建文件夹
 createTargetDir(projectName);
+
+const plugins = loadPlugins();
+
+console.log(plugins);
