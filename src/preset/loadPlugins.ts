@@ -9,7 +9,7 @@ export default function loadPlugins(): IPlugin[] {
     cwd: path.join(process.cwd(), 'lib'),
   });
   pluginPath.forEach((item) => {
-    const plugin: IPlugin = require(item).default;
+    const plugin: IPlugin = require(path.join('..', item)).default;
     plugins.push(plugin);
   });
   return plugins;
