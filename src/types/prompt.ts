@@ -9,3 +9,7 @@ interface IPromptChoices {
   name: string | number;
   value: string | number;
 }
+
+export interface IPromptCallBack {
+  (result: any): void;
+}

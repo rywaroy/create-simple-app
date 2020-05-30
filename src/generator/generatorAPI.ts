@@ -1,5 +1,5 @@
 import Generator from './index';
-import { IPrompt } from '../types';
+import { IPrompt, IPromptCallBack } from '../types';
 
 export default class GeneratorAPI {
   id: string;
@@ -14,7 +14,8 @@ export default class GeneratorAPI {
   /**
    * 添加预设选项
    */
-  addPresetPrompt(prompt: IPrompt) {
+  addPresetPrompt(prompt: IPrompt, cb: IPromptCallBack) {
     this.generator.presetPrompts.push(prompt);
+    this.generator.promptCallBacks.push(cb);
   }
 }

@@ -1,7 +1,8 @@
 import { IPlugin } from './plugin';
-import { IPrompt } from './prompt';
+import { IPrompt, IPromptCallBack } from './prompt';
 
 export {
   IPlugin,
   IPrompt,
+  IPromptCallBack,
 };
