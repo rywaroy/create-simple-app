@@ -1,4 +1,6 @@
+import GeneratorAPI from '../generator/generatorAPI';
+
 export interface IPlugin {
   id: string;
-  apply: () => void;
+  apply: (api: GeneratorAPI) => void;
 }
