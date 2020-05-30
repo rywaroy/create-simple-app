@@ -25,6 +25,7 @@ module.exports = {
         "import/extensions": [2, "never", { "ts": "never" }],
         'global-require': 0,
         'import/no-dynamic-require': 0,
+        'no-unused-vars': 0,
     },
     settings: {
         'import/resolver': {
