@@ -1,8 +1,9 @@
 import inquirer from 'inquirer';
+import { EventEmitter } from 'events';
 import { IPlugin, IPrompt, IPromptCallBack } from '../types';
 import GeneratorAPI from './generatorAPI';
 
-export default class Generator {
+export default class Generator extends EventEmitter {
   plugins: IPlugin[];
 
   presetPrompts: IPrompt[];
@@ -10,9 +11,12 @@ export default class Generator {
   promptCallBacks: IPromptCallBack[];
 
   constructor(plugins: IPlugin[]) {
+    super();
+    this.emit('start');
     this.plugins = plugins;
     this.presetPrompts = [];
     this.promptCallBacks = [];
+    this.emit('install-plugins');
     this.installPlugins();
   }
 
@@ -27,10 +31,12 @@ export default class Generator {
 
   // 创建
   async create() {
+    this.emit('create');
     const result = await inquirer.prompt(this.presetPrompts); // 交互式选择配置
     // 预设回调
     this.promptCallBacks.forEach((cb) => {
       cb(result);
     });
+    this.emit('after-prompts');
   }
 }
