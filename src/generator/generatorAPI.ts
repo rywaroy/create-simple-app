@@ -20,4 +20,11 @@ export default class GeneratorAPI {
       this.generator.promptCallBacks.push(cb);
     }
   }
+
+  /**
+   * 判断插件
+   */
+  hasPlugin(id: string): boolean {
+    return this.generator.hasPlugin(id);
+  }
 }

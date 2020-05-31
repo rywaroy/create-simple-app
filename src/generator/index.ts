@@ -29,6 +29,11 @@ export default class Generator extends EventEmitter {
     });
   }
 
+  // 判断插件
+  hasPlugin(id: string): boolean {
+    return this.plugins.filter((item) => item.id === id).length > 0;
+  }
+
   // 创建
   async create() {
     this.emit('create');
