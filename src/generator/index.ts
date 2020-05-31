@@ -1,8 +1,9 @@
 import inquirer from 'inquirer';
 import { EventEmitter } from 'events';
 import WebpackConfig from 'webpack-chain';
-
-import { IPlugin, IPrompt, IPromptCallBack } from '../types';
+import {
+  IPlugin, IPrompt, IPromptCallBack, IPackage, IGeneratorOtions,
+} from '../types';
 import GeneratorAPI from './generatorAPI';
 
 export default class Generator extends EventEmitter {
@@ -14,10 +15,14 @@ export default class Generator extends EventEmitter {
 
   config: WebpackConfig
 
-  constructor(plugins: IPlugin[]) {
+  pkg: IPackage;
+
+  constructor(content: string, options: IGeneratorOtions) {
     super();
     this.emit('start');
+    const { plugins, pkg } = options;
     this.plugins = plugins;
+    this.pkg = pkg;
     this.config = new WebpackConfig();
     this.presetPrompts = [];
     this.promptCallBacks = [];

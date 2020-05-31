@@ -1,12 +1,9 @@
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
+import path from 'path';
 
-import path = require('path');
-
-export default async function createTargetDir(projectName: string) {
-  const targetDir = path.resolve(process.cwd(), projectName); // 生成项目的目录
-
+export default async function createTargetDir(projectName: string, targetDir: string) {
   if (projectName !== '.') { // 如果在当前目录下创建则不创建额外文件夹
     if (fs.existsSync(targetDir)) {
       const { action } = await inquirer.prompt([
@@ -29,12 +26,4 @@ export default async function createTargetDir(projectName: string) {
       fs.ensureDirSync(targetDir);
     }
   }
-  const name = projectName === '.' ? path.basename(process.cwd()) : projectName;
-
-  // 生成package.json
-  const packageJson = {
-    name,
-    version: '0.1.0',
-  };
-  fs.writeJSONSync(path.join(targetDir, 'package.json'), packageJson);
 }
