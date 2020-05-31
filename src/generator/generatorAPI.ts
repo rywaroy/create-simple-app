@@ -27,4 +27,11 @@ export default class GeneratorAPI {
   hasPlugin(id: string): boolean {
     return this.generator.hasPlugin(id);
   }
+
+  /**
+   * webpack 配置
+   */
+  chainWebpack() {
+    return this.generator.config;
+  }
 }
