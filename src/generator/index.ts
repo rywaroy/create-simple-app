@@ -16,11 +16,13 @@ export default class Generator extends EventEmitter {
     this.plugins = plugins;
     this.presetPrompts = [];
     this.promptCallBacks = [];
-    this.emit('install-plugins');
     this.installPlugins();
+    this.emit('install-plugins');
   }
 
-  // 加载插件
+  /**
+   * 加载插件
+   */
   installPlugins() {
     this.plugins.forEach((plugin) => {
       const { id, apply } = plugin;
@@ -29,12 +31,30 @@ export default class Generator extends EventEmitter {
     });
   }
 
-  // 判断插件
+  /**
+   * 添加预设选项
+   */
+  addPresetPrompts(prompt: IPrompt) {
+    this.presetPrompts.push(prompt);
+  }
+
+  /**
+   * 添加预设回调
+   */
+  addPresetPromptsCallBack(cd: IPromptCallBack) {
+    this.promptCallBacks.push(cd);
+  }
+
+  /**
+   * 判断插件
+   */
   hasPlugin(id: string): boolean {
     return this.plugins.filter((item) => item.id === id).length > 0;
   }
 
-  // 创建
+  /**
+   * 创建
+   */
   async create() {
     this.emit('create');
     const result = await inquirer.prompt(this.presetPrompts); // 交互式选择配置

@@ -15,9 +15,9 @@ export default class GeneratorAPI {
    * 添加预设选项
    */
   addPresetPrompt(prompt: IPrompt, cb?: IPromptCallBack) {
-    this.generator.presetPrompts.push(prompt);
+    this.generator.addPresetPrompts(prompt);
     if (cb) {
-      this.generator.promptCallBacks.push(cb);
+      this.generator.addPresetPromptsCallBack(cb);
     }
   }
 
