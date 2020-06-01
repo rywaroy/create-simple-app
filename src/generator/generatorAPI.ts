@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import fs from 'fs-extra';
 import Generator from './index';
-import { IPrompt, IPromptCallBack } from '../types';
+import { IPrompt, IPromptCallBack, IModulePrompt } from '../types';
 
 export default class GeneratorAPI {
   id: string;
@@ -17,10 +17,24 @@ export default class GeneratorAPI {
    * 添加预设选项
    */
   addPresetPrompt(prompt: IPrompt, cb?: IPromptCallBack) {
-    this.generator.addPresetPrompts(prompt);
+    this.generator.addPresetPrompt(prompt);
     if (cb) {
-      this.generator.addPresetPromptsCallBack(cb);
+      this.generator.addPresetPromptCallBack(cb);
     }
+  }
+
+  /**
+   * 添加预设回调
+   */
+  addPresetPromptCallBack(cb: IPromptCallBack) {
+    this.generator.addPresetPromptCallBack(cb);
+  }
+
+  /**
+   * 添加模块选项
+   */
+  addModulePrompt(prompt: IModulePrompt) {
+    this.generator.addModulePrompt(prompt);
   }
 
   /**

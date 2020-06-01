@@ -13,3 +13,8 @@ interface IPromptChoices {
 export interface IPromptCallBack {
   (result: any): void;
 }
+
+export interface IModulePrompt {
+  name: string | number;
+  value: string | number;
+}

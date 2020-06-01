@@ -1,5 +1,5 @@
 import { IPlugin } from './plugin';
-import { IPrompt, IPromptCallBack } from './prompt';
+import { IPrompt, IPromptCallBack, IModulePrompt } from './prompt';
 import { IPackage } from './package';
 import { IGeneratorOtions } from './generator';
 
@@ -9,4 +9,5 @@ export {
   IPromptCallBack,
   IPackage,
   IGeneratorOtions,
+  IModulePrompt,
 };
