@@ -9,15 +9,11 @@ export default async function createTargetDir(projectName: string, targetDir: st
       const { action } = await inquirer.prompt([
         {
           name: 'action',
-          type: 'list',
-          message: `当前文件夹 ${chalk.cyan(targetDir)} 已经存在. 请选择操作:`,
-          choices: [
-            { name: '覆盖', value: 'overwrite' },
-            { name: '合并', value: 'merge' },
-          ],
+          type: 'confirm',
+          message: `当前文件夹 ${chalk.cyan(targetDir)} 已经存在. 是否覆盖:`,
         },
       ]);
-      if (action === 'overwrite') {
+      if (action) {
         console.log(`正在删除 ${chalk.cyan(targetDir)}...`);
         fs.removeSync(targetDir);
         fs.ensureDirSync(targetDir);
