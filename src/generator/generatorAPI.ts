@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import fs from 'fs-extra';
 import Generator from './index';
 import { IPrompt, IPromptCallBack } from '../types';
 
@@ -41,5 +42,12 @@ export default class GeneratorAPI {
    */
   extendPackage(object: any) {
     merge(this.generator.pkg, object);
+  }
+
+  /**
+   * 渲染静态资源
+   */
+  render(url: string) {
+    fs.copySync(url, this.generator.context);
   }
 }
