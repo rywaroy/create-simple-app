@@ -7,19 +7,22 @@ import {
 import GeneratorAPI from './generatorAPI';
 
 export default class Generator extends EventEmitter {
-  plugins: IPlugin[];
+  private plugins: IPlugin[];
 
-  presetPrompts: IPrompt[];
+  private presetPrompts: IPrompt[];
 
-  promptCallBacks: IPromptCallBack[];
+  private promptCallBacks: IPromptCallBack[];
 
-  config: WebpackConfig
+  public config: WebpackConfig
 
-  pkg: IPackage;
+  public pkg: IPackage;
 
-  constructor(content: string, options: IGeneratorOtions) {
+  public context: string;
+
+  constructor(context: string, options: IGeneratorOtions) {
     super();
     this.emit('start');
+    this.context = context;
     const { plugins, pkg } = options;
     this.plugins = plugins;
     this.pkg = pkg;

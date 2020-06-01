@@ -1,3 +1,4 @@
+import { merge } from 'lodash';
 import Generator from './index';
 import { IPrompt, IPromptCallBack } from '../types';
 
@@ -24,7 +25,7 @@ export default class GeneratorAPI {
   /**
    * 判断插件
    */
-  hasPlugin(id: string): boolean {
+  hasPlugin(id: string) {
     return this.generator.hasPlugin(id);
   }
 
@@ -33,5 +34,12 @@ export default class GeneratorAPI {
    */
   chainWebpack() {
     return this.generator.config;
+  }
+
+  /**
+   * package.json 配置
+   */
+  extendPackage(object: any) {
+    merge(this.generator.pkg, object);
   }
 }
