@@ -2,6 +2,9 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import GeneratorAPI from '../generator/generatorAPI';
 
+// @ts-ignore
+HtmlWebpackPlugin.__expression = 'require(\'html-webpack-plugin\')';
+
 const initPlugin = {
   id: 'init',
   apply: (api: GeneratorAPI) => {
