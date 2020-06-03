@@ -16,9 +16,9 @@ const installPlugin = {
       name: 'css less/postcss',
       value: 'css',
     });
-    api.addPresetPromptCallBack(({ module }) => {
+    api.addPresetPromptCallBack(({ module }: { module: string[]}) => {
       // 判断是否选择了css
-      if ((module as string[]).includes('css')) {
+      if (module.includes('css')) {
         // 添加依赖
         api.extendPackage({
           autoprefixer: '^9.8.0',

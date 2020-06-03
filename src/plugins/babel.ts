@@ -7,9 +7,9 @@ const installPlugin = {
       name: 'babel',
       value: 'babel',
     });
-    api.addPresetPromptCallBack(({ module }) => {
+    api.addPresetPromptCallBack(({ module }: { module: string[]}) => {
       // 判断是否选择了bebel
-      if ((module as string[]).includes('babel')) {
+      if (module.includes('babel')) {
         api.chainWebpack()
           .module
           .rule('babel')
