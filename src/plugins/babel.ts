@@ -20,6 +20,11 @@ const installPlugin = {
           .use('babel-loader')
           .loader('babel-loader');
         api.extendPackage({
+          devDependencies: {
+            '@babel/core': '^7.10.2',
+            '@babel/preset-env': '^7.10.2',
+            'babel-loader': '^8.1.0',
+          },
           babel: {
             presets: [
               [
