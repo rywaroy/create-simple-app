@@ -1,5 +1,6 @@
 import { merge } from 'lodash';
 import fs from 'fs-extra';
+import path from 'path';
 import Generator from './index';
 import { IPrompt, IPromptCallBack, IModulePrompt } from '../types';
 
@@ -59,9 +60,16 @@ export default class GeneratorAPI {
   }
 
   /**
+   * 复制静态资源
+   */
+  copy(url: string) {
+    fs.copySync(url, this.generator.context);
+  }
+
+  /**
    * 渲染静态资源
    */
-  render(url: string) {
-    fs.copySync(url, this.generator.context);
+  render(fileName: string, code: string) {
+    fs.writeFileSync(path.join(this.generator.context, fileName), code);
   }
 }

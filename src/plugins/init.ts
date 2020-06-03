@@ -48,7 +48,7 @@ const initPlugin = {
     });
 
     // 渲染模板
-    api.render(path.join(__dirname, '../../template'));
+    api.copy(path.join(__dirname, '../../template'));
   },
 };
 
