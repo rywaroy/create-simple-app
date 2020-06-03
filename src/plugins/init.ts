@@ -39,6 +39,12 @@ const initPlugin = {
         build: 'webpack',
         dev: 'webpack-dev-server',
       },
+      browserslist: [
+        'last 2 versions',
+        '> 1%',
+        'iOS 7',
+        'last 3 iOS versions',
+      ],
     });
 
     // 渲染模板
