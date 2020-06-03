@@ -13,7 +13,7 @@ const installPlugin = {
         api.chainWebpack()
           .module
           .rule('babel')
-          .test(/\.js$/)
+          .test(/\.js(x?)$/)
           .exclude
           .add(/node_modules/)
           .end()
