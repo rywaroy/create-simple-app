@@ -1,5 +1,14 @@
 import GeneratorAPI from '../generator/generatorAPI';
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+// @ts-ignore
+MiniCssExtractPlugin.__expression = 'require(\'mini-css-extract-plugin\')';
+const MiniCssExtractPluginLoader = {
+  __expression: '',
+};
+MiniCssExtractPluginLoader.__expression = 'require(\'mini-css-extract-plugin\').loader';
+
 const installPlugin = {
   id: 'install',
   apply: (api: GeneratorAPI) => {
@@ -17,7 +26,6 @@ const installPlugin = {
           less: '^3.11.2',
           'less-loader': '^6.1.0',
           'postcss-loader': '^3.0.0',
-          'style-loader': '^1.2.1',
         });
 
         // 配置css
@@ -25,8 +33,9 @@ const installPlugin = {
           .module
           .rule('css')
           .test(/\.css$/)
-          .use('style-loader')
-          .loader('style-loader')
+          .use('mini-css')
+          // @ts-ignore
+          .loader(MiniCssExtractPluginLoader)
           .end()
           .use('postcss-loader')
           .loader('postcss-loader')
@@ -40,8 +49,9 @@ const installPlugin = {
           .module
           .rule('less')
           .test(/\.less$/)
-          .use('style-loader')
-          .loader('style-loader')
+          .use('mini-css')
+          // @ts-ignore
+          .loader(MiniCssExtractPluginLoader)
           .end()
           .use('css-loader')
           .loader('css-loader')
@@ -53,12 +63,19 @@ const installPlugin = {
           .loader('less-loader')
           .end();
 
+        // 配置mini-css-extract-plugin插件
+        api.chainWebpack()
+          .plugin('mini-css-extract-plugin')
+          .use(MiniCssExtractPlugin, [{
+            filename: '[name].css',
+          }]);
+
         api.render('postcss.config.js', `
-        module.exports = {
-          plugins: [
-            require('autoprefixer')
-          ]
-        }
+module.exports = {
+  plugins: [
+    require('autoprefixer')
+  ]
+}
         `);
       }
     });
