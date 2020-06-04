@@ -49,11 +49,22 @@ const eslintPlugin = {
             },
           });
         }
+        if (module.includes('react')) {
+          eslintConfig.extends.unshift('plugin:react/recommended');
+          eslintConfig.parserOptions.ecmaFeatures = { jsx: true };
+          eslintConfig.plugins.push('react');
+          api.extendPackage({
+            devDependencies: {
+              'eslint-plugin-jsx-a11y': '^6.2.3',
+              'eslint-plugin-react': '^7.20.0',
+              'eslint-plugin-react-hooks': '^4.0.4',
+            },
+          });
+        }
         api.render('.eslintrc.js', `module.exports = ${JSON.stringify(eslintConfig)}`);
       }
     });
   },
-  // @typescript-eslint/eslint-plugin@latest eslint-config-airbnb-base@latest eslint@^5.16.0 || ^6.8.0 eslint-plugin-import@^2.20.1 @typescript-eslint/parser@latest
 };
 
 export default eslintPlugin;
