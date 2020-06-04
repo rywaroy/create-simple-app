@@ -1,8 +1,12 @@
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
 import GeneratorAPI from '../generator/generatorAPI';
 
-// @ts-ignore
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+CleanWebpackPlugin.__expression = 'require(\'clean-webpack-plugin\').CleanWebpackPlugin';
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 HtmlWebpackPlugin.__expression = 'require(\'html-webpack-plugin\')';
 
 const initPlugin = {
@@ -25,7 +29,10 @@ const initPlugin = {
       .plugin('html-template')
       .use(HtmlWebpackPlugin, [{
         template: 'src/index.html',
-      }]);
+      }])
+      .end()
+      .plugin('clean-webpack-plugin')
+      .use(CleanWebpackPlugin);
 
     // package.json 配置
     api.extendPackage({
