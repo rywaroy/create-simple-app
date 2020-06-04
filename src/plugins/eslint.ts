@@ -39,16 +39,8 @@ const eslintPlugin = {
             'eslint-plugin-import': '^2.20.2',
           },
         });
-        if (module.includes('typescript')) {
-          eslintConfig.parser = '@typescript-eslint/parser';
-          eslintConfig.plugins.push('@typescript-eslint');
-          api.extendPackage({
-            devDependencies: {
-              '@typescript-eslint/eslint-plugin': '^3.1.0',
-              '@typescript-eslint/parser': '^3.1.0',
-            },
-          });
-        }
+
+        // 判断是否是react
         if (module.includes('react')) {
           eslintConfig.extends.unshift('plugin:react/recommended');
           eslintConfig.parserOptions.ecmaFeatures = { jsx: true };
@@ -58,6 +50,29 @@ const eslintPlugin = {
               'eslint-plugin-jsx-a11y': '^6.2.3',
               'eslint-plugin-react': '^7.20.0',
               'eslint-plugin-react-hooks': '^4.0.4',
+            },
+          });
+        }
+
+        // 判断是否是vue
+        if (module.includes('vue')) {
+          eslintConfig.extends.unshift('plugin:vue/essential');
+          eslintConfig.plugins.push('vue');
+          api.extendPackage({
+            devDependencies: {
+              'eslint-plugin-vue': '^6.2.2',
+            },
+          });
+        }
+
+        // 判断是否是typescript
+        if (module.includes('typescript')) {
+          eslintConfig.parser = '@typescript-eslint/parser';
+          eslintConfig.plugins.push('@typescript-eslint');
+          api.extendPackage({
+            devDependencies: {
+              '@typescript-eslint/eslint-plugin': '^3.1.0',
+              '@typescript-eslint/parser': '^3.1.0',
             },
           });
         }
