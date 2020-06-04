@@ -1,7 +1,7 @@
 import GeneratorAPI from '../generator/generatorAPI';
 
-const installPlugin = {
-  id: 'install',
+const babelPlugin = {
+  id: 'babel',
   apply: (api: GeneratorAPI) => {
     api.addModulePrompt({
       name: 'babel',
@@ -41,4 +41,4 @@ const installPlugin = {
   },
 };
 
-export default installPlugin;
+export default babelPlugin;

@@ -9,8 +9,8 @@ const MiniCssExtractPluginLoader = {
 };
 MiniCssExtractPluginLoader.__expression = 'require(\'mini-css-extract-plugin\').loader';
 
-const installPlugin = {
-  id: 'install',
+const cssPlugin = {
+  id: 'css',
   apply: (api: GeneratorAPI) => {
     api.addModulePrompt({
       name: 'css less/postcss',
@@ -82,4 +82,4 @@ module.exports = {
   },
 };
 
-export default installPlugin;
+export default cssPlugin;
