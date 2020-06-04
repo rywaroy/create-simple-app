@@ -35,6 +35,7 @@ const eslintPlugin = {
         api.extendPackage({
           devDependencies: {
             eslint: '^6.8.0',
+            'eslint-config-airbnb': '^18.1.0',
             'eslint-config-airbnb-base': '^14.1.0',
             'eslint-plugin-import': '^2.20.2',
           },
@@ -73,6 +74,7 @@ const eslintPlugin = {
             devDependencies: {
               '@typescript-eslint/eslint-plugin': '^3.1.0',
               '@typescript-eslint/parser': '^3.1.0',
+              typescript: '^3.9.3',
             },
           });
         }
