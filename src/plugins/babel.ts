@@ -24,6 +24,7 @@ const babelPlugin = {
             '@babel/core': '^7.10.2',
             '@babel/preset-env': '^7.10.2',
             'babel-loader': '^8.1.0',
+            'babel-plugin-transform-class-properties': '^6.24.1',
           },
           babel: {
             presets: [
@@ -34,6 +35,7 @@ const babelPlugin = {
                 },
               ],
             ],
+            plugins: ['transform-class-properties'],
           },
         });
       }
