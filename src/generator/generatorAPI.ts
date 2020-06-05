@@ -1,6 +1,6 @@
-import { merge } from 'lodash';
 import fs from 'fs-extra';
 import path from 'path';
+import merge from '../utils/merge';
 import Generator from './index';
 import { IPrompt, IPromptCallBack, IModulePrompt } from '../types';
 
