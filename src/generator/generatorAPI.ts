@@ -69,7 +69,13 @@ export default class GeneratorAPI {
   /**
    * 渲染静态资源
    */
-  render(fileName: string, code: string) {
-    fs.writeFileSync(path.join(this.generator.context, fileName), code);
+  render(fileName: string, code: string | object) {
+    const target = path.join(this.generator.context, fileName);
+    if (typeof code === 'string') {
+      fs.writeFileSync(target, code);
+    }
+    if (typeof code === 'object') {
+      fs.writeJSONSync(target, code);
+    }
   }
 }
