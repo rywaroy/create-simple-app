@@ -32,12 +32,25 @@ const babelPlugin = {
                 '@babel/preset-env',
                 {
                   useBuiltIns: 'entry',
+                  corejs: 3,
                 },
               ],
             ],
             plugins: ['transform-class-properties'],
           },
         });
+
+        // 选择了typescript添加配置
+        if (module.includes('typescript')) {
+          api.extendPackage({
+            devDependencies: {
+              '@babel/preset-typescript': '^7.8.3',
+            },
+            babel: {
+              presets: ['@babel/preset-typescript'],
+            },
+          });
+        }
       }
     });
   },
