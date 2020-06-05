@@ -95,6 +95,6 @@ export default class Generator extends EventEmitter {
     });
     this.emit('after-prompts');
     fs.writeFileSync(path.join(this.context, 'webpack.config.js'), `module.exports = ${this.config.toString()}`);
-    fs.writeJSONSync(path.join(this.context, 'pakcage.json'), this.pkg);
+    fs.writeJSONSync(path.join(this.context, 'package.json'), this.pkg);
   }
 }
