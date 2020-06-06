@@ -4,10 +4,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // @ts-ignore
 MiniCssExtractPlugin.__expression = 'require(\'mini-css-extract-plugin\')';
+
 const MiniCssExtractPluginLoader = {
-  __expression: '',
+  __expression: 'require(\'mini-css-extract-plugin\').loader',
 };
-MiniCssExtractPluginLoader.__expression = 'require(\'mini-css-extract-plugin\').loader';
 
 const cssPlugin = {
   id: 'css',
