@@ -1,5 +1,9 @@
 import GeneratorAPI from '../generator/generatorAPI';
 
+const VueLoaderPlugin = {
+  __expression: 'require(\'vue-loader/lib/plugin\')',
+};
+
 const vuePlugin = {
   id: 'vue',
   apply: (api: GeneratorAPI) => {
@@ -16,6 +20,10 @@ const vuePlugin = {
           .test(/\.vue$/)
           .use('vue-loader')
           .loader('vue-loader');
+        api.chainWebpack()
+          .plugin('vue-loader-plugin')
+          // @ts-ignore
+          .use(VueLoaderPlugin);
         api.extendPackage({
           devDependencies: {
             'vue-loader': '^15.9.2',
