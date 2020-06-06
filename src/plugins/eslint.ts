@@ -5,7 +5,7 @@ const eslintPlugin = {
   id: 'eslint',
   apply: (api: GeneratorAPI) => {
     api.addModulePrompt({
-      name: 'eslint airbnb',
+      name: 'Eslint airbnb',
       value: 'eslint',
     });
     api.addPresetPromptCallBack(({ module }: { module: string[]}) => {

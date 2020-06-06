@@ -4,7 +4,7 @@ const typescriptPlugin = {
   id: 'typescript',
   apply: (api: GeneratorAPI) => {
     api.addModulePrompt({
-      name: 'Typescript',
+      name: 'TypeScript',
       value: 'typescript',
     });
     api.addPresetPromptCallBack(({ module }: { module: string[]}) => {

@@ -4,7 +4,7 @@ const babelPlugin = {
   id: 'babel',
   apply: (api: GeneratorAPI) => {
     api.addModulePrompt({
-      name: 'babel',
+      name: 'Babel',
       value: 'babel',
     });
     api.addPresetPromptCallBack(({ module }: { module: string[]}) => {

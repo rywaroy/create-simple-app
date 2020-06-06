@@ -13,7 +13,7 @@ const cssPlugin = {
   id: 'css',
   apply: (api: GeneratorAPI) => {
     api.addModulePrompt({
-      name: 'css less/postcss',
+      name: 'Css less/postcss',
       value: 'css',
     });
     api.addPresetPromptCallBack(({ module }: { module: string[]}) => {

@@ -4,7 +4,7 @@ const filePlugin = {
   id: 'file',
   apply: (api: GeneratorAPI) => {
     api.addModulePrompt({
-      name: 'file img/font',
+      name: 'file-loader img/font',
       value: 'file',
     });
     api.addPresetPromptCallBack(({ module }: { module: string[]}) => {
