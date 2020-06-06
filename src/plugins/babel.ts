@@ -42,6 +42,10 @@ const babelPlugin = {
 
         // 选择了typescript添加配置
         if (module.includes('typescript')) {
+          api.chainWebpack()
+            .module
+            .rule('babel')
+            .test(/\.(j|t)s(x?)$/);
           api.extendPackage({
             devDependencies: {
               '@babel/preset-typescript': '^7.8.3',
