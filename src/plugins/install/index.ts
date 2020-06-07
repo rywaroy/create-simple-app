@@ -1,4 +1,4 @@
-import GeneratorAPI from '../generator/generatorAPI';
+import GeneratorAPI from '../../generator/generatorAPI';
 
 const installPlugin = {
   id: 'install',

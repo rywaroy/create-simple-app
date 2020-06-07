@@ -1,5 +1,5 @@
-import GeneratorAPI from '../generator/generatorAPI';
-import { IEslintConfig } from '../types';
+import GeneratorAPI from '../../generator/generatorAPI';
+import { IEslintConfig } from '../../types';
 
 const eslintPlugin = {
   id: 'eslint',

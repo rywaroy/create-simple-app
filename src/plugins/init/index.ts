@@ -1,5 +1,5 @@
 import path from 'path';
-import GeneratorAPI from '../generator/generatorAPI';
+import GeneratorAPI from '../../generator/generatorAPI';
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
