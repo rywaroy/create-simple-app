@@ -20,6 +20,9 @@ const jestPlugin = {
         const jestConfig: IJestConfig = {
           clearMocks: true,
           coverageDirectory: 'coverage',
+          transformIgnorePatterns: [
+            '/node_modules/',
+          ],
           moduleFileExtensions: [
             'js',
             'json',
@@ -35,6 +38,7 @@ const jestPlugin = {
             devDependencies: {
               enzyme: '^3.11.0',
               'enzyme-adapter-react-16': '^1.15.2',
+              'jest-enzyme': '^7.1.2',
             },
           });
           jestConfig.setupFilesAfterEnv = [
@@ -42,6 +46,18 @@ const jestPlugin = {
             './utils/setup.js',
           ];
           api.copy(path.join(__dirname, './template'));
+        }
+        if (module.includes('vue')) {
+          api.extendPackage({
+            devDependencies: {
+              '@vue/test-utils': '^1.0.3',
+              'vue-jest': '^3.0.5',
+            },
+          });
+          jestConfig.moduleFileExtensions.push('vue');
+          jestConfig.transform = {
+            '.*\\.(vue)$': 'vue-jest',
+          };
         }
         api.render('jest.config.js', `module.exports = ${JSON.stringify(jestConfig)}`);
       }
