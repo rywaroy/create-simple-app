@@ -5,7 +5,7 @@ import path = require('path');
 
 export default function loadPlugins(): IPlugin[] {
   const plugins: IPlugin[] = [];
-  const pluginPath = glob.sync('./plugins/**/index.js', {
+  const pluginPath = glob.sync('./plugins/*/index.js', {
     cwd: path.join(process.cwd(), 'lib'),
   });
   pluginPath.forEach((item) => {
