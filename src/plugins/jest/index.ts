@@ -6,7 +6,7 @@ const jestPlugin = {
   id: 'jest',
   apply: (api: GeneratorAPI) => {
     api.addModulePrompt({
-      name: 'Jest',
+      name: 'Jest Enzyme/vue-test-utils',
       value: 'jest',
     });
     api.addPresetPromptCallBack(({ module }: { module: string[]}) => {
@@ -57,6 +57,16 @@ const jestPlugin = {
           jestConfig.moduleFileExtensions.push('vue');
           jestConfig.transform = {
             '.*\\.(vue)$': 'vue-jest',
+          };
+        }
+        if (module.includes('typescript')) {
+          api.extendPackage({
+            devDependencies: {
+              'ts-jest': '^26.1.0',
+            },
+          });
+          jestConfig.transform = {
+            '^.+\\.tsx?$': 'ts-jest',
           };
         }
         api.render('jest.config.js', `module.exports = ${JSON.stringify(jestConfig)}`);
