@@ -15,6 +15,7 @@ const jestPlugin = {
         api.extendPackage({
           devDependencies: {
             jest: '^26.0.1',
+            'babel-jest': '^26.0.1',
           },
         });
         const jestConfig: IJestConfig = {
@@ -32,7 +33,12 @@ const jestPlugin = {
             'node',
           ],
           testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
-          transform: {},
+          transform: {
+            '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
+          },
+          moduleNameMapper: {
+            '^@/(.*)$': '<rootDir>/src/$1',
+          },
         };
         if (module.includes('react')) {
           api.extendPackage({
