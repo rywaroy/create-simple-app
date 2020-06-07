@@ -32,6 +32,7 @@ const jestPlugin = {
             'node',
           ],
           testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
+          transform: {},
         };
         if (module.includes('react')) {
           api.extendPackage({
@@ -55,9 +56,7 @@ const jestPlugin = {
             },
           });
           jestConfig.moduleFileExtensions.push('vue');
-          jestConfig.transform = {
-            '.*\\.(vue)$': 'vue-jest',
-          };
+          jestConfig.transform['.*\\.(vue)$'] = 'vue-jest';
         }
         if (module.includes('typescript')) {
           api.extendPackage({
@@ -65,9 +64,7 @@ const jestPlugin = {
               'ts-jest': '^26.1.0',
             },
           });
-          jestConfig.transform = {
-            '^.+\\.tsx?$': 'ts-jest',
-          };
+          jestConfig.transform['^.+\\.tsx?$'] = 'ts-jest';
         }
         api.render('jest.config.js', `module.exports = ${JSON.stringify(jestConfig)}`);
       }
