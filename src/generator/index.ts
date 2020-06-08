@@ -11,17 +11,17 @@ import GeneratorAPI from './generatorAPI';
 export default class Generator extends EventEmitter {
   private plugins: IPlugin[];
 
-  private presetPrompts: IPrompt[];
+  presetPrompts: IPrompt[];
 
-  private promptCallBacks: IPromptCallBack[];
+  promptCallBacks: IPromptCallBack[];
 
-  private modulePrompts: IModulePrompt[];
+  modulePrompts: IModulePrompt[];
 
-  public config: WebpackConfig
+  config: WebpackConfig
 
-  public pkg: IPackage;
+  pkg: IPackage;
 
-  public context: string;
+  context: string;
 
   constructor(context: string, options: IGeneratorOtions) {
     super();
