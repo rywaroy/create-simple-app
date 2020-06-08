@@ -1,7 +1,6 @@
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import path from 'path';
 
 export default async function createTargetDir(projectName: string, targetDir: string) {
   if (projectName !== '.') { // 如果在当前目录下创建则不创建额外文件夹
