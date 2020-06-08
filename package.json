@@ -7,6 +7,9 @@
     "test": "jest --coverage",
     "dev": "nodemon bin/index.js"
   },
+  "bin": {
+    "create-simple-app": "bind/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rywaroy/create-simple-app.git"
