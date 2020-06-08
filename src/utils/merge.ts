@@ -1,16 +1,5 @@
 import { IPackage } from '../types';
-
-function isObject(arg: any): boolean {
-  return Object.prototype.toString.call(arg) === '[object Object]';
-}
-
-function isArray(arg: any): boolean {
-  return Object.prototype.toString.call(arg) === '[object Array]';
-}
-
-function isBasic(arg:any): boolean {
-  return typeof arg === 'string' || typeof arg === 'number';
-}
+import { isArray, isBasic, isObject } from './util';
 
 function mergeProps(object: any, source: any) {
   Object.keys(source).forEach((key) => {
