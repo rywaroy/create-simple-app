@@ -21,11 +21,14 @@ const cssPlugin = {
       if (module.includes('css')) {
         // 添加依赖
         api.extendPackage({
-          autoprefixer: '^9.8.0',
-          'css-loader': '^3.5.3',
-          less: '^3.11.2',
-          'less-loader': '^6.1.0',
-          'postcss-loader': '^3.0.0',
+          devDependencies: {
+            autoprefixer: '^9.8.0',
+            'css-loader': '^3.5.3',
+            less: '^3.11.2',
+            'less-loader': '^6.1.0',
+            'postcss-loader': '^3.0.0',
+            'mini-css-extract-plugin': '^0.9.0',
+          },
         });
 
         // 配置css
