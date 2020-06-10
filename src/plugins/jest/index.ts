@@ -13,6 +13,9 @@ const jestPlugin = {
       // 判断是否选择了jest
       if (module.includes('jest')) {
         api.extendPackage({
+          scripts: {
+            test: 'jest',
+          },
           devDependencies: {
             jest: '^26.0.1',
             'babel-jest': '^26.0.1',
