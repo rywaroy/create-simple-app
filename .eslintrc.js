@@ -28,6 +28,7 @@ module.exports = {
         'no-unused-vars': 0,
         'no-underscore-dangle': 0,
         'no-param-reassign': 0,
+        'no-plusplus': 0,
     },
     settings: {
         'import/resolver': {
