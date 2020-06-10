@@ -37,6 +37,7 @@ const initPlugin = {
     // package.json 配置
     api.extendPackage({
       devDependencies: {
+        'clean-webpack-plugin': '^3.0.0',
         'html-webpack-plugin': '^4.3.0',
         webpack: '^4.43.0',
         'webpack-cli': '^3.3.11',
