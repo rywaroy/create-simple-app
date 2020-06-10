@@ -1,5 +1,7 @@
 import execa from 'execa';
+import ora from 'ora';
 import GeneratorAPI from '../../generator/generatorAPI';
+
 
 const installPlugin = {
   id: 'install',
@@ -17,12 +19,12 @@ const installPlugin = {
     }, ({ type }) => {
       if (type) {
         api.generator.on('after-create', () => {
-          console.log('安装中...');
+          const spinner = ora('安装依赖中\n').start();
           const exec = execa.command(type, {
             cwd: api.generator.context,
           });
           exec.on('close', () => {
-            console.log('安装成功');
+            spinner.succeed('安装成功');
           });
         });
       }
