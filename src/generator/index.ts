@@ -25,7 +25,6 @@ export default class Generator extends EventEmitter {
 
   constructor(context: string, options: IGeneratorOtions) {
     super();
-    this.emit('start');
     this.context = context;
     const { plugins, pkg } = options;
     this.plugins = plugins;
@@ -35,7 +34,6 @@ export default class Generator extends EventEmitter {
     this.promptCallBacks = [];
     this.modulePrompts = [];
     this.installPlugins();
-    this.emit('install-plugins');
   }
 
   /**
@@ -81,7 +79,6 @@ export default class Generator extends EventEmitter {
    * 创建
    */
   async create() {
-    this.emit('create');
     this.presetPrompts.unshift({
       name: 'module',
       type: 'checkbox',
@@ -93,8 +90,8 @@ export default class Generator extends EventEmitter {
     this.promptCallBacks.forEach((cb) => {
       cb(result);
     });
-    this.emit('after-prompts');
     fs.writeFileSync(path.join(this.context, 'webpack.config.js'), `module.exports = ${this.config.toString()}`);
     fs.writeJSONSync(path.join(this.context, 'package.json'), this.pkg);
+    this.emit('after-create');
   }
 }
