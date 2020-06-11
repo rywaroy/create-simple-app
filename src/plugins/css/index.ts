@@ -31,47 +31,60 @@ const cssPlugin = {
           },
         });
 
-        // 配置css
-        api.chainWebpack()
-          .module
-          .rule('css')
-          .test(/\.css$/)
-          .use('mini-css')
+        if (module.includes('vue')) {
+          api.chainWebpack()
+            .module
+            .rule('css')
+            .test(/\.css$/)
+            .use('vue-style-loader')
+            .loader('vue-style-loader')
+            .end()
+            .use('css-loader')
+            .loader('css-loader');
+        } else {
+          // 配置css
+          api.chainWebpack()
+            .module
+            .rule('css')
+            .test(/\.css$/)
+            .use('mini-css')
           // @ts-ignore
-          .loader(MiniCssExtractPluginLoader)
-          .end()
-          .use('postcss-loader')
-          .loader('postcss-loader')
-          .end()
-          .use('css-loader')
-          .loader('css-loader')
-          .end();
+            .loader(MiniCssExtractPluginLoader)
+            .end()
+            .use('postcss-loader')
+            .loader('postcss-loader')
+            .end()
+            .use('css-loader')
+            .loader('css-loader')
+            .end();
 
-        // 配置less
-        api.chainWebpack()
-          .module
-          .rule('less')
-          .test(/\.less$/)
-          .use('mini-css')
+          // 配置less
+          api.chainWebpack()
+            .module
+            .rule('less')
+            .test(/\.less$/)
+            .use('mini-css')
           // @ts-ignore
-          .loader(MiniCssExtractPluginLoader)
-          .end()
-          .use('css-loader')
-          .loader('css-loader')
-          .end()
-          .use('postcss-loader')
-          .loader('postcss-loader')
-          .end()
-          .use('less-loader')
-          .loader('less-loader')
-          .end();
+            .loader(MiniCssExtractPluginLoader)
+            .end()
+            .use('css-loader')
+            .loader('css-loader')
+            .end()
+            .use('postcss-loader')
+            .loader('postcss-loader')
+            .end()
+            .use('less-loader')
+            .loader('less-loader')
+            .end();
 
-        // 配置mini-css-extract-plugin插件
-        api.chainWebpack()
-          .plugin('mini-css-extract-plugin')
-          .use(MiniCssExtractPlugin, [{
-            filename: '[name].css',
-          }]);
+          // 配置mini-css-extract-plugin插件
+          api.chainWebpack()
+            .plugin('mini-css-extract-plugin')
+            .use(MiniCssExtractPlugin, [{
+              filename: '[name].css',
+            }]);
+        }
+
 
         api.render('postcss.config.js', `
 module.exports = {
