@@ -60,6 +60,7 @@ const jestPlugin = {
         if (module.includes('vue')) {
           api.extendPackage({
             devDependencies: {
+              'babel-core': '^6.26.3',
               '@vue/test-utils': '^1.0.3',
               'vue-jest': '^3.0.5',
             },
