@@ -1,4 +1,6 @@
-# create-simple-app
+# create-simple-app 
+
+[![Build Status](https://travis-ci.org/rywaroy/create-simple-app.svg?branch=master)](https://travis-ci.org/rywaroy/create-simple-app)
 
 > 快速创建简单应用
 
