@@ -55,7 +55,7 @@ const jestPlugin = {
             './node_modules/jest-enzyme/lib/index.js',
             './utils/setup.js',
           ];
-          api.copy(path.join(__dirname, './template'));
+          api.copy(path.join(__dirname, '../../../template/jest'));
         }
         if (module.includes('vue')) {
           api.extendPackage({
