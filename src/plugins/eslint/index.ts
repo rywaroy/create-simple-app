@@ -78,6 +78,11 @@ const eslintPlugin = {
             },
           });
         }
+
+        // 判断是否是jest
+        if (module.includes('jest')) {
+          eslintConfig.env.jest = true;
+        }
         api.render('.eslintrc.js', `module.exports = ${JSON.stringify(eslintConfig)}`);
       }
     });
