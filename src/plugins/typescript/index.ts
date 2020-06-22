@@ -27,6 +27,8 @@ const typescriptPlugin = {
             noImplicitReturns: true,
             moduleResolution: 'node',
             esModuleInterop: true,
+            declaration: true,
+            declarationDir: './lib',
           },
           include: [
             'src/**/*',
