@@ -71,6 +71,7 @@ const jestPlugin = {
         if (module.includes('typescript')) {
           api.extendPackage({
             devDependencies: {
+              '@types/jest': '^26.0.0',
               'ts-jest': '^26.1.0',
             },
           });
