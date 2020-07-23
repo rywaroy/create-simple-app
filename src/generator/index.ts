@@ -4,7 +4,7 @@ import WebpackConfig from 'webpack-chain';
 import fs from 'fs-extra';
 import path from 'path';
 import {
-  IPlugin, IPrompt, IPromptCallBack, IPackage, IGeneratorOtions, IModulePrompt,
+  IPlugin, IPrompt, IPromptCallBack, IPackage, IGeneratorOtions, IModulePrompt, IPromptResult,
 } from '../types';
 import GeneratorAPI from './generatorAPI';
 import codeFormat from '../utils/codeFormat';
@@ -22,18 +22,21 @@ export default class Generator extends EventEmitter {
 
   pkg: IPackage;
 
+  promptResult: IPromptResult | undefined;
+
   context: string;
 
   constructor(context: string, options: IGeneratorOtions) {
     super();
     this.context = context;
-    const { plugins, pkg } = options;
+    const { plugins, pkg, promptResult } = options;
     this.plugins = plugins;
     this.pkg = pkg;
     this.config = new WebpackConfig();
     this.presetPrompts = [];
     this.promptCallBacks = [];
     this.modulePrompts = [];
+    this.promptResult = promptResult;
     this.installPlugins();
   }
 
@@ -86,7 +89,14 @@ export default class Generator extends EventEmitter {
       message: '请选择需要的功能:',
       choices: this.modulePrompts,
     });
-    const result = await inquirer.prompt(this.presetPrompts); // 交互式选择配置
+
+    let result: any;
+    if (this.promptResult) {
+      result = this.promptResult;
+    } else {
+      result = await inquirer.prompt(this.presetPrompts); // 交互式选择配置
+    }
+
     // 预设回调
     this.promptCallBacks.forEach((cb) => {
       cb(result);

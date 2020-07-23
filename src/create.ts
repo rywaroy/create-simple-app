@@ -2,6 +2,7 @@ import path from 'path';
 import checkAppName from './preset/checkAppName';
 import createTargetDir from './preset/createTargetDir';
 import Generator from './generator';
+import { IPromptResult } from './types';
 import babel from './plugins/babel';
 import css from './plugins/css';
 import eslint from './plugins/eslint';
@@ -13,7 +14,7 @@ import react from './plugins/react';
 import typescript from './plugins/typescript';
 import vue from './plugins/vue';
 
-export default async function create(project: string | undefined) {
+export default async function create(project: string | undefined, promptResult?: IPromptResult) {
   let projectName = '.';
   if (project) {
     projectName = project;
@@ -40,6 +41,7 @@ export default async function create(project: string | undefined) {
   const generator = new Generator(targetDir, {
     plugins: [babel, css, eslint, file, init, install, jest, react, typescript, vue],
     pkg,
+    promptResult,
   });
 
   // 调用实例的创建方法
