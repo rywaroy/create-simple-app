@@ -1,27 +1,22 @@
-import commander from 'commander';
 import path from 'path';
 import checkAppName from './preset/checkAppName';
 import createTargetDir from './preset/createTargetDir';
-import loadPlugins from './preset/loadPlugins';
 import Generator from './generator';
+import babel from './plugins/babel';
+import css from './plugins/css';
+import eslint from './plugins/eslint';
+import file from './plugins/file';
+import init from './plugins/init';
+import install from './plugins/install';
+import jest from './plugins/jest';
+import react from './plugins/react';
+import typescript from './plugins/typescript';
+import vue from './plugins/vue';
 
-const packageJson = require('../package.json');
-
-let projectName: string = '.';
-
-const { program } = commander;
-
-program
-  .version(packageJson.version)
-  .arguments('<project-directory>');
-
-program.parse(process.argv);
-
-async function run() {
-  if (program.args.length > 0) { // 创建新文件夹
-    [projectName] = program.args;
-
-    // 检查合法应用名
+export default async function create(project: string | undefined) {
+  let projectName = '.';
+  if (project) {
+    projectName = project;
     checkAppName(projectName);
   }
 
@@ -29,9 +24,6 @@ async function run() {
 
   // 创建文件夹
   await createTargetDir(projectName, targetDir);
-
-  // 遍历加载插件
-  const plugins = loadPlugins();
 
   const name = projectName === '.' ? path.basename(process.cwd()) : projectName;
 
@@ -46,12 +38,10 @@ async function run() {
 
   // 初始化Generator类型
   const generator = new Generator(targetDir, {
-    plugins,
+    plugins: [babel, css, eslint, file, init, install, jest, react, typescript, vue],
     pkg,
   });
 
   // 调用实例的创建方法
   generator.create();
 }
-
-run();
