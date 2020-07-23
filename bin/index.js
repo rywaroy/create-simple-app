@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 'use strict';
+const { program } = require('commander');
+const packageJson = require('../package.json');
+const create = require('../lib/create');
 
 const currentNodeVersion = process.versions.node;
 const semver = currentNodeVersion.split('.');
@@ -11,4 +14,11 @@ if (major < 10) {
   process.exit(1);
 }
 
-require('../lib');
+program
+  .version(packageJson.version)
+  .command('create [project]')
+  .action((project) => {
+    create(project);
+  });
+
+program.parse(process.argv);
