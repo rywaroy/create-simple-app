@@ -1,17 +1,8 @@
-import { IPlugin } from './plugin';
-import { IPrompt, IPromptCallBack, IModulePrompt } from './prompt';
-import { IPackage } from './package';
-import { IGeneratorOtions } from './generator';
-import { IEslintConfig } from './eslint';
-import { IJestConfig } from './jest';
-
+export { IPlugin } from './plugin';
 export {
-  IPlugin,
-  IPrompt,
-  IPromptCallBack,
-  IPackage,
-  IGeneratorOtions,
-  IModulePrompt,
-  IEslintConfig,
-  IJestConfig,
-};
+  IPrompt, IPromptCallBack, IModulePrompt, IPromptResult,
+} from './prompt';
+export { IPackage } from './package';
+export { IGeneratorOtions } from './generator';
+export { IEslintConfig } from './eslint';
+export { IJestConfig } from './jest';
