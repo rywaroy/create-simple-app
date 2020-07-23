@@ -3,7 +3,7 @@
 'use strict';
 const { program } = require('commander');
 const packageJson = require('../package.json');
-const create = require('../lib/create');
+const create = require('../lib/create').default;
 
 const currentNodeVersion = process.versions.node;
 const semver = currentNodeVersion.split('.');
