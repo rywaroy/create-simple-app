@@ -80,6 +80,20 @@ export default class Generator extends EventEmitter {
   }
 
   /**
+   * 获取Prompts
+   */
+  getPrompts() {
+    return this.presetPrompts;
+  }
+
+  /**
+   * 获取modulePrompts
+   */
+  getModulePrompts() {
+    return this.modulePrompts;
+  }
+
+  /**
    * 创建
    */
   async create() {
