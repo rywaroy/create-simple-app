@@ -44,6 +44,5 @@ export default async function create(project: string | undefined, promptResult?:
     promptResult,
   });
 
-  // 调用实例的创建方法
-  generator.create();
+  return generator;
 }

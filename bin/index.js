@@ -24,7 +24,8 @@ program
     if (!project && fs.existsSync(path.join(process.cwd(), 'package.json'))) {
       // create(project);
     } else {
-      create(project); 
+      const generator = create(project); 
+      generator.create();
     }
   });
 
