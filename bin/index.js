@@ -6,6 +6,7 @@ const path = require('path');
 const { program } = require('commander');
 const packageJson = require('../package.json');
 const create = require('../lib/create').default;
+const add = require('../lib/add').default;
 
 const currentNodeVersion = process.versions.node;
 const semver = currentNodeVersion.split('.');
@@ -20,13 +21,14 @@ program
   .version(packageJson.version)
   .arguments('[project]')
   .action((project) => {
+    let generator
     // 在当前文件夹下创建且已有工程
     if (!project && fs.existsSync(path.join(process.cwd(), 'package.json'))) {
-      // create(project);
+      generator = add();
     } else {
-      const generator = create(project); 
-      generator.create();
+      generator = create(project);
     }
+    generator.create();
   });
 
 program.parse(process.argv);
