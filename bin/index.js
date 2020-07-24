@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 'use strict';
+const fs = require('fs');
+const path = require('path');
 const { program } = require('commander');
 const packageJson = require('../package.json');
 const create = require('../lib/create').default;
@@ -16,9 +18,14 @@ if (major < 10) {
 
 program
   .version(packageJson.version)
-  .command('create [project]')
+  .arguments('[project]')
   .action((project) => {
-    create(project);
+    // 在当前文件夹下创建且已有工程
+    if (!project && fs.existsSync(path.join(process.cwd(), 'package.json'))) {
+      // create(project);
+    } else {
+      create(project); 
+    }
   });
 
 program.parse(process.argv);
