@@ -5,5 +5,5 @@ import { IPromptResult } from './prompt';
 export interface IGeneratorOtions {
   plugins: IPlugin[];
   pkg: IPackage;
-  promptResult: IPromptResult | undefined;
+  promptResult?: IPromptResult;
 }
