@@ -6,6 +6,7 @@ import eslint from './plugins/eslint';
 import install from './plugins/install';
 import jest from './plugins/jest';
 import prettier from './plugins/prettier';
+import stylelint from './plugins/stylelint';
 
 export default function add(promptResult?: IPromptResult) {
   const pkgPath = path.join(process.cwd(), 'package.json');
@@ -15,7 +16,7 @@ export default function add(promptResult?: IPromptResult) {
   const pkg = JSON.parse(fs.readFileSync(pkgPath).toString());
   // 初始化Generator类型
   const generator = new Generator(process.cwd(), {
-    plugins: [eslint, install, jest, prettier],
+    plugins: [eslint, install, jest, prettier, stylelint],
     pkg,
     promptResult,
   });

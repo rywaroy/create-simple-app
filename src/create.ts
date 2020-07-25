@@ -14,8 +14,12 @@ import react from './plugins/react';
 import typescript from './plugins/typescript';
 import vue from './plugins/vue';
 import prettier from './plugins/prettier';
+import stylelint from './plugins/stylelint';
 
-export default async function create(project: string | undefined, promptResult?: IPromptResult) {
+export default async function create(
+  project: string | undefined,
+  promptResult?: IPromptResult,
+) {
   let projectName = '.';
   if (project) {
     projectName = project;
@@ -40,7 +44,20 @@ export default async function create(project: string | undefined, promptResult?:
 
   // 初始化Generator类型
   const generator = new Generator(targetDir, {
-    plugins: [babel, css, eslint, file, init, install, jest, react, typescript, vue, prettier],
+    plugins: [
+      babel,
+      css,
+      eslint,
+      file,
+      init,
+      install,
+      jest,
+      react,
+      typescript,
+      vue,
+      prettier,
+      stylelint,
+    ],
     pkg,
     promptResult,
   });
