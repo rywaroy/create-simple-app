@@ -83,6 +83,16 @@ const eslintPlugin = {
         if (module.includes('jest')) {
           eslintConfig.env.jest = true;
         }
+
+        // 判断是否是prettier
+        if (module.includes('prettier')) {
+          eslintConfig.extends.push('prettier');
+          api.extendPackage({
+            devDependencies: {
+              'eslint-config-prettier': '^6.11.0',
+            },
+          });
+        }
         api.render('.eslintrc.js', `module.exports = ${JSON.stringify(eslintConfig)}`);
       }
     });
