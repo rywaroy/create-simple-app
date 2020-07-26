@@ -3,7 +3,7 @@ import path from 'path';
 import merge from '../utils/merge';
 import Generator from './index';
 import { IPrompt, IPromptCallBack, IModulePrompt } from '../types';
-import codeFormat from '../utils/codeFormat';
+import { codeFormat, codeFormatJson } from '../utils/codeFormat';
 
 export default class GeneratorAPI {
   id: string;
@@ -76,7 +76,7 @@ export default class GeneratorAPI {
       fs.writeFileSync(target, codeFormat(code));
     }
     if (typeof code === 'object') {
-      fs.writeJSONSync(target, code);
+      fs.writeFileSync(target, codeFormatJson(JSON.stringify(code)));
     }
   }
 }

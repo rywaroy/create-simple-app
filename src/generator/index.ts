@@ -7,7 +7,7 @@ import {
   IPlugin, IPrompt, IPromptCallBack, IPackage, IGeneratorOtions, IModulePrompt, IPromptResult,
 } from '../types';
 import GeneratorAPI from './generatorAPI';
-import codeFormat from '../utils/codeFormat';
+import { codeFormat, codeFormatJson } from '../utils/codeFormat';
 
 export default class Generator extends EventEmitter {
   private plugins: IPlugin[];
@@ -116,7 +116,7 @@ export default class Generator extends EventEmitter {
       cb(result);
     });
     fs.writeFileSync(path.join(this.context, 'webpack.config.js'), codeFormat(`module.exports = ${this.config.toString()}`));
-    fs.writeJSONSync(path.join(this.context, 'package.json'), this.pkg);
+    fs.writeFileSync(path.join(this.context, 'package.json'), codeFormatJson(JSON.stringify(this.pkg)));
     this.emit('after-create');
   }
 }
