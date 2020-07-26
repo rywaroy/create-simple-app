@@ -15,6 +15,9 @@ import typescript from './plugins/typescript';
 import vue from './plugins/vue';
 import prettier from './plugins/prettier';
 import stylelint from './plugins/stylelint';
+import lintStaged from './plugins/lint-staged';
+import husky from './plugins/husky';
+import commitlint from './plugins/commitlint';
 
 export default async function create(
   project: string | undefined,
@@ -57,6 +60,9 @@ export default async function create(
       vue,
       prettier,
       stylelint,
+      lintStaged,
+      husky,
+      commitlint,
     ],
     pkg,
     promptResult,
