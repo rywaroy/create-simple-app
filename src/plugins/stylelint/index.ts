@@ -20,7 +20,7 @@ const stylelintPlugin = {
         const stylelintConfig = {
           extends: 'stylelint-config-standard',
         };
-        api.render('jest.config.js', `module.exports = ${JSON.stringify(stylelintConfig)}`);
+        api.render('.stylelintrc', `module.exports = ${JSON.stringify(stylelintConfig)}`);
       }
     });
   },
