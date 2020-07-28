@@ -3,6 +3,9 @@ import fs from 'fs-extra';
 import create from '../src/create';
 
 describe('测试create方法', () => {
+  afterEach(() => {
+    fs.removeSync(path.join(process.cwd(), 'example'));
+  });
   it('测试全配置', async () => {
     const generator = await create('example', {
       module: ['babel', 'commitlint', 'css', 'eslint', 'file', 'husky', 'jest', 'lint-staged', 'prettier', 'react', 'stylelint', 'typescript', 'vue'],
@@ -23,5 +26,13 @@ describe('测试create方法', () => {
     expect(fs.existsSync(path.join(examplePath, '.stylelintrc'))).toBeTruthy();
     expect(fs.existsSync(path.join(examplePath, 'tsconfig.json'))).toBeTruthy();
     expect(pkg.dependencies).toHaveProperty('vue');
+  });
+
+  it('测试获取prompts方法', async () => {
+    const generator = await create('example', {
+      module: [],
+    });
+    generator.create();
+    expect(generator.getPrompts()).toBeTruthy();
   });
 });
