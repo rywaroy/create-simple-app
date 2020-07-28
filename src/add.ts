@@ -11,14 +11,21 @@ import lintStaged from './plugins/lint-staged';
 import husky from './plugins/husky';
 import commitlint from './plugins/commitlint';
 
-export default function add(promptResult?: IPromptResult) {
-  const pkgPath = path.join(process.cwd(), 'package.json');
+export default function add(
+  project?: string,
+  promptResult?: IPromptResult,
+) {
+  let targetPath = process.cwd();
+  if (project) {
+    targetPath = path.join(targetPath, project);
+  }
+  const pkgPath = path.join(targetPath, 'package.json');
   if (!fs.existsSync(pkgPath)) {
     return null;
   }
   const pkg = JSON.parse(fs.readFileSync(pkgPath).toString());
   // 初始化Generator类型
-  const generator = new Generator(process.cwd(), {
+  const generator = new Generator(targetPath, {
     plugins: [
       eslint,
       install,
