@@ -35,4 +35,13 @@ describe('测试create方法', () => {
     generator.create();
     expect(generator.getPrompts()).toBeTruthy();
   });
+
+  it('测试获取getModulePrompts方法', async () => {
+    const generator = await create('example', {
+      module: ['babel', 'eslint', 'css', 'jest', 'husky'],
+    });
+    generator.create();
+    console.log(generator.getModulePrompts());
+    expect(generator.getModulePrompts()).toBeTruthy();
+  });
 });
