@@ -101,6 +101,7 @@ export default class Generator extends EventEmitter {
    * 创建
    */
   async create() {
+    this.emit('before-create');
     // 创建文件夹
     if (this.projectName) {
       await createTargetDir(this.projectName, this.context);
