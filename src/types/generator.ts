@@ -6,5 +6,5 @@ export interface IGeneratorOtions {
   plugins: IPlugin[];
   pkg: IPackage;
   promptResult?: IPromptResult;
-  projectName: string;
+  projectName?: string;
 }
