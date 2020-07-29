@@ -7,10 +7,10 @@ describe('测试create方法', () => {
     fs.removeSync(path.join(process.cwd(), 'example'));
   });
   it('测试全配置', async () => {
-    const generator = await create('example', {
+    const generator = create('example', {
       module: ['babel', 'commitlint', 'css', 'eslint', 'file', 'husky', 'jest', 'lint-staged', 'prettier', 'react', 'stylelint', 'typescript', 'vue'],
     });
-    generator.create();
+    await generator.create();
     const examplePath = path.join(process.cwd(), 'example');
     const pkg = fs.readJSONSync(path.join(examplePath, 'package.json'));
     expect(pkg).toHaveProperty('babel');
@@ -29,18 +29,18 @@ describe('测试create方法', () => {
   });
 
   it('测试获取prompts方法', async () => {
-    const generator = await create('example', {
+    const generator = create('example', {
       module: [],
     });
-    generator.create();
+    await generator.create();
     expect(generator.getPrompts()).toBeTruthy();
   });
 
   it('测试获取getModulePrompts方法', async () => {
-    const generator = await create('example', {
+    const generator = create('example', {
       module: ['babel', 'eslint', 'css', 'jest', 'husky'],
     });
-    generator.create();
+    await generator.create();
     console.log(generator.getModulePrompts());
     expect(generator.getModulePrompts()).toBeTruthy();
   });
