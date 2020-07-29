@@ -19,13 +19,13 @@ if (major < 10) {
 program
   .version(packageJson.version)
   .arguments('[project]')
-  .action(async (project) => {
+  .action((project) => {
     let generator
     // 在当前文件夹下创建且已有工程
     if (!project && fs.existsSync(path.join(process.cwd(), 'package.json'))) {
       generator = add();
     } else {
-      generator = await create(project);
+      generator = create(project);
     }
     generator.create();
   });
