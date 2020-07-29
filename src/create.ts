@@ -19,7 +19,7 @@ import lintStaged from './plugins/lint-staged';
 import husky from './plugins/husky';
 import commitlint from './plugins/commitlint';
 
-export default async function create(
+export default function create(
   project: string | undefined,
   promptResult?: IPromptResult,
 ) {
@@ -30,9 +30,6 @@ export default async function create(
   }
 
   const targetDir = path.resolve(process.cwd(), projectName); // 生成项目的目录
-
-  // 创建文件夹
-  await createTargetDir(projectName, targetDir);
 
   const name = projectName === '.' ? path.basename(process.cwd()) : projectName;
 
@@ -66,6 +63,7 @@ export default async function create(
     ],
     pkg,
     promptResult,
+    projectName,
   });
 
   return generator;

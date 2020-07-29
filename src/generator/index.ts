@@ -7,6 +7,7 @@ import {
   IPlugin, IPrompt, IPromptCallBack, IPackage, IGeneratorOtions, IModulePrompt, IPromptResult,
 } from '../types';
 import GeneratorAPI from './generatorAPI';
+import createTargetDir from '../preset/createTargetDir';
 import { codeFormat, codeFormatJson } from '../utils/codeFormat';
 
 export default class Generator extends EventEmitter {
@@ -26,12 +27,15 @@ export default class Generator extends EventEmitter {
 
   context: string;
 
+  projectName: string;
+
   constructor(context: string, options: IGeneratorOtions) {
     super();
     this.context = context;
-    const { plugins, pkg, promptResult } = options;
+    const { plugins, pkg, promptResult, projectName } = options;
     this.plugins = plugins;
     this.pkg = pkg;
+    this.projectName = projectName;
     this.config = new WebpackConfig();
     this.presetPrompts = [];
     this.promptCallBacks = [];
@@ -97,6 +101,9 @@ export default class Generator extends EventEmitter {
    * 创建
    */
   async create() {
+    // 创建文件夹
+    await createTargetDir(this.projectName, this.context);
+
     this.presetPrompts.unshift({
       name: 'module',
       type: 'checkbox',
