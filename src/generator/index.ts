@@ -23,11 +23,11 @@ export default class Generator extends EventEmitter {
 
   pkg: IPackage;
 
-  promptResult: IPromptResult | undefined;
+  promptResult?: IPromptResult;
 
   context: string;
 
-  projectName: string;
+  projectName?: string;
 
   constructor(context: string, options: IGeneratorOtions) {
     super();
@@ -102,7 +102,9 @@ export default class Generator extends EventEmitter {
    */
   async create() {
     // 创建文件夹
-    await createTargetDir(this.projectName, this.context);
+    if (this.projectName) {
+      await createTargetDir(this.projectName, this.context);
+    }
 
     this.presetPrompts.unshift({
       name: 'module',
@@ -122,7 +124,11 @@ export default class Generator extends EventEmitter {
     this.promptCallBacks.forEach((cb) => {
       cb(result);
     });
-    fs.writeFileSync(path.join(this.context, 'webpack.config.js'), codeFormat(`module.exports = ${this.config.toString()}`));
+
+    if (this.projectName) {
+      fs.writeFileSync(path.join(this.context, 'webpack.config.js'), codeFormat(`module.exports = ${this.config.toString()}`));
+    }
+
     fs.writeFileSync(path.join(this.context, 'package.json'), codeFormatJson(JSON.stringify(this.pkg)));
     this.emit('after-create');
   }
