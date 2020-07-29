@@ -1,6 +1,5 @@
 import path from 'path';
 import checkAppName from './preset/checkAppName';
-import createTargetDir from './preset/createTargetDir';
 import Generator from './generator';
 import { IPromptResult } from './types';
 import babel from './plugins/babel';
@@ -41,7 +40,6 @@ export default function create(
     devDependencies: {},
     dependencies: {},
   };
-
   // 初始化Generator类型
   const generator = new Generator(targetDir, {
     plugins: [
@@ -65,6 +63,5 @@ export default function create(
     promptResult,
     projectName,
   });
-
   return generator;
 }
