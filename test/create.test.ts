@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
+import Generator from '../src/generator';
 import create from '../src/create';
 
 describe('测试create方法', () => {
@@ -10,7 +11,7 @@ describe('测试create方法', () => {
     const generator = create('example', {
       module: ['babel', 'commitlint', 'css', 'eslint', 'file', 'husky', 'jest', 'lint-staged', 'prettier', 'react', 'stylelint', 'typescript', 'vue'],
     });
-    await generator.create();
+    await (generator as Generator).create();
     const examplePath = path.join(process.cwd(), 'example');
     const pkg = fs.readJSONSync(path.join(examplePath, 'package.json'));
     expect(pkg).toHaveProperty('babel');
@@ -32,16 +33,24 @@ describe('测试create方法', () => {
     const generator = create('example', {
       module: [],
     });
-    await generator.create();
-    expect(generator.getPrompts()).toBeTruthy();
+    await (generator as Generator).create();
+    expect((generator as Generator).getPrompts()).toBeTruthy();
   });
 
   it('测试获取getModulePrompts方法', async () => {
     const generator = create('example', {
       module: ['babel', 'eslint', 'css', 'jest', 'husky'],
     });
-    await generator.create();
-    console.log(generator.getModulePrompts());
-    expect(generator.getModulePrompts()).toBeTruthy();
+    await (generator as Generator).create();
+    expect((generator as Generator).getModulePrompts()).toBeTruthy();
+  });
+
+  it('测试异常的文件夹名', () => {
+    console.error = jest.fn();
+    const generator = create('a/b', {
+      module: [],
+    });
+    console.log((console.error as jest.Mock).mock.calls.length);
+    expect((console.error as jest.Mock).mock.calls.length).toBeTruthy();
   });
 });
