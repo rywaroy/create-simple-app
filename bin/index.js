@@ -27,7 +27,7 @@ program
     } else {
       generator = create(project);
     }
-    generator.create();
+    generator && generator.create();
   });
 
 program.parse(process.argv);

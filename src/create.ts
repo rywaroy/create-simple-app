@@ -25,7 +25,10 @@ export default function create(
   let projectName = '.';
   if (project) {
     projectName = project;
-    checkAppName(projectName);
+    const { validForNewPackages } = checkAppName(projectName);
+    if (!validForNewPackages) {
+      return false;
+    }
   }
 
   const targetDir = path.resolve(process.cwd(), projectName); // 生成项目的目录
