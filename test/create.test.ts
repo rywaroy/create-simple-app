@@ -31,7 +31,7 @@ describe('测试create方法', () => {
 
   it('测试获取prompts方法', async () => {
     const generator = create('example', {
-      module: [],
+      module: ['lint-staged', 'eslint'],
     });
     await (generator as Generator).create();
     expect((generator as Generator).getPrompts()).toBeTruthy();
