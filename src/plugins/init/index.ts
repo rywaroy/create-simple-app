@@ -56,7 +56,9 @@ const initPlugin = {
     });
 
     // 渲染模板
-    api.copy(path.join(__dirname, '../../../template/init'));
+    api.generator.on('before-create', () => {
+      api.copy(path.join(__dirname, '../../../template/init'));
+    });
   },
 };
 

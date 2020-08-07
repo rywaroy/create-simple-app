@@ -25,6 +25,6 @@ export default function checkAppName(appName: string) {
       console.error(chalk.red(`  * ${error}`));
     });
     console.error(chalk.red('\n请选择另外的应用名.'));
-    process.exit(1);
   }
+  return result;
 }

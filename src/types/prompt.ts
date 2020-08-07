@@ -18,3 +18,7 @@ export interface IModulePrompt {
   name: string | number;
   value: string | number;
 }
+
+export interface IPromptResult {
+  [props: string]: any;
+}

@@ -40,6 +40,8 @@ create-simple-app
 
 第二种不设置目标文件夹，则会在当前目录下创建配置文件
 
+> 如果当前目录一下已经存在项目（判断目录下是否有package.json）会进入 `添加配置模式`，提供部分配置对原有的package.json 进行改造添加
+
 ### 支持的功能
 
 * Babel
@@ -53,6 +55,12 @@ create-simple-app
 * Eslint
 
   支持airbnb规范，如果选择了vue react typescript 则会添加对应eslint配置
+
+* Stylelint
+
+  支持stylelint-config-standard规范，添加`.stylelintrc`配置
+
+* Prettier
 
 * file-loader
 
@@ -73,3 +81,53 @@ create-simple-app
 * Vue
 
   添加对应的babel支持，`vue` `vuex` `vue-router`依赖
+
+* lint-staged
+
+  如果添加了`stylelint` `prettier` `eslint`配置，会添加对应的工作流程
+
+* commitlint
+
+* husky
+
+  如果添加了 `lint-staged` 则会添加 `pre-commit` 钩子。如果添加了 `commitlint` 则会添加 `commit-msg` 钩子。 
+
+### API
+
+`create(project?, promptResult?)`
+
+* 参数
+
+  * project - 项目名称
+  * promptResult - 指定的inquirer配置，如果设置将跳过inquirer
+
+* 返回值
+
+  * Generator 实例
+
+```js
+import { create } from 'create-simple-app';
+
+const generator = create();
+
+generator.create();
+```
+
+`add(project?, promptResult?)`
+
+* 参数
+
+  * project - 项目名称
+  * promptResult - 指定的inquirer配置，如果设置将跳过inquirer
+
+* 返回值
+
+  * Generator 实例
+
+```js
+import { add } from 'create-simple-app';
+
+const generator = add();
+
+generator.create();
+```

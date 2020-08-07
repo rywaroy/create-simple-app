@@ -4,10 +4,11 @@ import WebpackConfig from 'webpack-chain';
 import fs from 'fs-extra';
 import path from 'path';
 import {
-  IPlugin, IPrompt, IPromptCallBack, IPackage, IGeneratorOtions, IModulePrompt,
+  IPlugin, IPrompt, IPromptCallBack, IPackage, IGeneratorOtions, IModulePrompt, IPromptResult,
 } from '../types';
 import GeneratorAPI from './generatorAPI';
-import codeFormat from '../utils/codeFormat';
+import createTargetDir from '../preset/createTargetDir';
+import { codeFormat, codeFormatJson } from '../utils/codeFormat';
 
 export default class Generator extends EventEmitter {
   private plugins: IPlugin[];
@@ -22,18 +23,24 @@ export default class Generator extends EventEmitter {
 
   pkg: IPackage;
 
+  promptResult?: IPromptResult;
+
   context: string;
+
+  projectName?: string;
 
   constructor(context: string, options: IGeneratorOtions) {
     super();
     this.context = context;
-    const { plugins, pkg } = options;
+    const { plugins, pkg, promptResult, projectName } = options;
     this.plugins = plugins;
     this.pkg = pkg;
+    this.projectName = projectName;
     this.config = new WebpackConfig();
     this.presetPrompts = [];
     this.promptCallBacks = [];
     this.modulePrompts = [];
+    this.promptResult = promptResult;
     this.installPlugins();
   }
 
@@ -77,22 +84,53 @@ export default class Generator extends EventEmitter {
   }
 
   /**
+   * 获取Prompts
+   */
+  getPrompts() {
+    return this.presetPrompts;
+  }
+
+  /**
+   * 获取modulePrompts
+   */
+  getModulePrompts() {
+    return this.modulePrompts;
+  }
+
+  /**
    * 创建
    */
   async create() {
+    // 创建文件夹
+    if (this.projectName) {
+      await createTargetDir(this.projectName, this.context);
+    }
+    this.emit('before-create');
+
     this.presetPrompts.unshift({
       name: 'module',
       type: 'checkbox',
       message: '请选择需要的功能:',
       choices: this.modulePrompts,
     });
-    const result = await inquirer.prompt(this.presetPrompts); // 交互式选择配置
+
+    let result: any;
+    if (this.promptResult) {
+      result = this.promptResult;
+    } else {
+      result = await inquirer.prompt(this.presetPrompts); // 交互式选择配置
+    }
+
     // 预设回调
     this.promptCallBacks.forEach((cb) => {
       cb(result);
     });
-    fs.writeFileSync(path.join(this.context, 'webpack.config.js'), codeFormat(`module.exports = ${this.config.toString()}`));
-    fs.writeJSONSync(path.join(this.context, 'package.json'), this.pkg);
+
+    if (this.projectName) {
+      fs.writeFileSync(path.join(this.context, 'webpack.config.js'), codeFormat(`module.exports = ${this.config.toString()}`));
+    }
+
+    fs.writeFileSync(path.join(this.context, 'package.json'), codeFormatJson(JSON.stringify(this.pkg)));
     this.emit('after-create');
   }
 }

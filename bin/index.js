@@ -1,6 +1,11 @@
 #!/usr/bin/env node
 
 'use strict';
+const fs = require('fs');
+const path = require('path');
+const { program } = require('commander');
+const packageJson = require('../package.json');
+const { create, add } = require('../lib');
 
 const currentNodeVersion = process.versions.node;
 const semver = currentNodeVersion.split('.');
@@ -11,4 +16,18 @@ if (major < 10) {
   process.exit(1);
 }
 
-require('../lib');
+program
+  .version(packageJson.version)
+  .arguments('[project]')
+  .action((project) => {
+    let generator
+    // 在当前文件夹下创建且已有工程
+    if (!project && fs.existsSync(path.join(process.cwd(), 'package.json'))) {
+      generator = add();
+    } else {
+      generator = create(project);
+    }
+    generator && generator.create();
+  });
+
+program.parse(process.argv);

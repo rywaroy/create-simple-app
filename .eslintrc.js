@@ -29,6 +29,7 @@ module.exports = {
         'no-underscore-dangle': 0,
         'no-param-reassign': 0,
         'no-plusplus': 0,
+        'object-curly-newline': 0,
     },
     settings: {
         'import/resolver': {
