@@ -50,7 +50,6 @@ describe('测试create方法', () => {
     const generator = create('a/b', {
       module: [],
     });
-    console.log((console.error as jest.Mock).mock.calls.length);
     expect((console.error as jest.Mock).mock.calls.length).toBeTruthy();
   });
 });
