@@ -19,7 +19,7 @@ import husky from './plugins/husky';
 import commitlint from './plugins/commitlint';
 
 export default function create(
-  project: string | undefined,
+  project?: string,
   promptResult?: IPromptResult,
 ) {
   let projectName = '.';
