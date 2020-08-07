@@ -16,7 +16,7 @@ const huskyPlugin = {
         if (module.includes('lint-staged')) {
           huskyConfig.hooks['pre-commit'] = 'lint-staged';
         }
-        if (module.includes('commintlint')) {
+        if (module.includes('commitlint')) {
           huskyConfig.hooks['commit-msg'] = 'commitlint -E HUSKY_GIT_PARAMS';
         }
         api.extendPackage({
